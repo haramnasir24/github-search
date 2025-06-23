@@ -3,13 +3,14 @@ import githubLogo from "./assets/github.jpg";
 
 function Header() {
   return (
-    <div
+    <header
       className={css({
         display: "flex",
         flexDir: "row",
-        alignItems: "center",
-        justifyContent: "center",
         gap: "4",
+        width: "100%",
+        maxWidth: "900px",
+        marginX: "auto",
       })}
     >
       <img
@@ -17,15 +18,15 @@ function Header() {
         alt="GitHub Logo"
         className={css({ width: "50px", height: "50px" })}
       />
-      <div className={css({ display: "flex", flexDir: "column" })}>
+      <section className={css({ display: "flex", flexDir: "column" })}>
         <h1 className={css({ fontSize: "2xl", fontWeight: "bold" })}>
           GitHub Searcher
         </h1>
         <p className={css({ color: "grey" })}>
           Search users or repositories below
         </p>
-      </div>
-    </div>
+      </section>
+    </header>
   );
 }
 

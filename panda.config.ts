@@ -13,11 +13,22 @@ export default defineConfig({
   // Useful for theme customization
   theme: {
     extend: {
-      // tokens: {
-      //   colors: {
-      //     black: { value : '#030712'}
-      //   }
-      // }
+      semanticTokens: {
+        colors: {
+          background: {
+            value: {
+              _light: '{colors.white}', // Default for light mode
+              _dark: '{colors.gray.900}', // For dark mode
+            },
+          },
+          text: {
+            value: {
+              _light: '{colors.gray.900}',
+              _dark: '{colors.white}',
+            },
+          },
+        },
+      },
     },
   },
 
