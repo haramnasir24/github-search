@@ -10,7 +10,7 @@ const RepoCard = ({ repo, refProp }: RepoCardProps) => (
   <div
     key={repo.id}
     ref={refProp}
-    className={css({ border: "1px solid #eee", p: 2 })}
+    className={css({ border: "1px solid #353634", p: 2 })}
   >
     <div>{repo.full_name}</div>
     <div>
