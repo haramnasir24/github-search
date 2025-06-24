@@ -1,5 +1,6 @@
 import { css } from "../styled-system/css";
 import githubLogo from "./assets/github.jpg";
+import ToggleButton from "./components/ToggleButton";
 
 type HeaderProps = {
   isDarkMode: boolean;
@@ -31,12 +32,7 @@ function Header({ isDarkMode, onToggleDarkMode }: HeaderProps) {
           Search users or repositories below
         </p>
       </section>
-      <button
-        onClick={() => onToggleDarkMode(!isDarkMode)}
-        aria-label="Toggle dark mode"
-      >
-        {isDarkMode ? "Light Mode" : "Dark Mode"}
-      </button>
+      <ToggleButton isDarkMode={isDarkMode} onToggleDarkMode={onToggleDarkMode} />
     </header>
   );
 }

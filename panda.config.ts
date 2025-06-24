@@ -17,18 +17,32 @@ export default defineConfig({
         colors: {
           bg: {
             value: {
-              _light: { value: "{colors.white}" },
-              _dark: { value: "{colors.gray.900}" },
+              _light: "{colors.white}",
+              _dark: "{colors.gray.900}",
             },
           },
           text: {
             value: {
-              _light: { value: "{colors.gray.900}" },
-              _dark: { value: "{colors.white}" },
+              _light: "{colors.gray.900}",
+              _dark: "{colors.white}",
             },
           },
         },
       },
+    },
+  },
+
+  // Conditions for color modes
+  conditions: {
+    light: "[data-color-mode=light] &",
+    dark: "[data-color-mode=dark] &",
+  },
+
+  // Global styles
+  globalCss: {
+    body: {
+      bg: "bg",
+      color: "text",
     },
   },
 
