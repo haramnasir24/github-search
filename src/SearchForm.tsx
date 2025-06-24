@@ -3,7 +3,7 @@ import { css } from "../styled-system/css";
 import useDebounce from "./hooks/useDebounce";
 import useInfiniteScroll from "./hooks/useInfiniteScroll";
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "./store";
+import type { RootState } from "./redux/store";
 import { cacheResults } from "./slices/searchSlice";
 import UserCard from "./components/UserCard";
 import RepoCard from "./components/RepoCard";
