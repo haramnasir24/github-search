@@ -1,21 +1,22 @@
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { css } from "../styled-system/css";
 import Header from "./Header";
 import SearchForm from "./SearchForm";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const body = document.querySelector('body');
-    if (body) {
-      if (isDarkMode) {
-        body.setAttribute('data-color-mode', 'dark');
+  const handleToggleDarkMode = (enabled: boolean) => {
+    setIsDarkMode(enabled);
+    if (containerRef.current) {
+      if (enabled) {
+        containerRef.current.setAttribute("data-color-mode", "dark");
       } else {
-        body.removeAttribute('data-color-mode');
+        containerRef.current.removeAttribute("data-color-mode");
       }
     }
-  }, [isDarkMode]);
+  };
 
   return (
     <div
@@ -28,11 +29,11 @@ function App() {
         maxWidth: "900px",
         marginX: "auto",
         paddingTop: 8,
-        bg: 'bg', 
-        color: 'text'
+        bg: "bg",
+        color: "text",
       })}
     >
-      <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+      <Header isDarkMode={isDarkMode} onToggleDarkMode={handleToggleDarkMode} />
       <SearchForm />
     </div>
   );

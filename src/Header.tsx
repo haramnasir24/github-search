@@ -3,10 +3,10 @@ import githubLogo from "./assets/github.jpg";
 
 type HeaderProps = {
   isDarkMode: boolean;
-  setIsDarkMode: (value: boolean) => void;
+  onToggleDarkMode: (enabled: boolean) => void;
 };
 
-function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
+function Header({ isDarkMode, onToggleDarkMode }: HeaderProps) {
   return (
     <header
       className={css({
@@ -31,8 +31,11 @@ function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
           Search users or repositories below
         </p>
       </section>
-      <button onClick={() => setIsDarkMode(!isDarkMode)}>
-        Toggle Dark Mode
+      <button
+        onClick={() => onToggleDarkMode(!isDarkMode)}
+        aria-label="Toggle dark mode"
+      >
+        {isDarkMode ? "Light Mode" : "Dark Mode"}
       </button>
     </header>
   );
