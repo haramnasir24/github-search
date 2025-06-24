@@ -176,6 +176,7 @@ function SearchForm() {
           gridTemplateColumns: "repeat(3, 1fr)",
           gap: 4,
           marginTop: 4,
+          marginBottom: 4,
           "@media (max-width: 768px)": {
             gridTemplateColumns: "repeat(2, 1fr)",
           },
