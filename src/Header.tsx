@@ -1,7 +1,12 @@
 import { css } from "../styled-system/css";
 import githubLogo from "./assets/github.jpg";
 
-function Header() {
+type HeaderProps = {
+  isDarkMode: boolean;
+  setIsDarkMode: (value: boolean) => void;
+};
+
+function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
   return (
     <header
       className={css({
@@ -26,6 +31,9 @@ function Header() {
           Search users or repositories below
         </p>
       </section>
+      <button onClick={() => setIsDarkMode(!isDarkMode)}>
+        Toggle Dark Mode
+      </button>
     </header>
   );
 }

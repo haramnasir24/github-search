@@ -15,16 +15,16 @@ export default defineConfig({
     extend: {
       semanticTokens: {
         colors: {
-          background: {
+          bg: {
             value: {
-              _light: '{colors.white}', // Default for light mode
-              _dark: '{colors.gray.900}', // For dark mode
+              _light: { value: "{colors.white}" },
+              _dark: { value: "{colors.gray.900}" },
             },
           },
           text: {
             value: {
-              _light: '{colors.gray.900}',
-              _dark: '{colors.white}',
+              _light: { value: "{colors.gray.900}" },
+              _dark: { value: "{colors.white}" },
             },
           },
         },
