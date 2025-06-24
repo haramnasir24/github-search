@@ -1,5 +1,5 @@
 import { css } from "../styled-system/css";
-import githubLogo from "./assets/github.jpg";
+import githubLogo from "./assets/github.png";
 import ToggleButton from "./components/ToggleButton";
 
 type HeaderProps = {
