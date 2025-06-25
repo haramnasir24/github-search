@@ -17,3 +17,10 @@ export type RepoResult = {
   forks_count: number;
   language?: string;
 };
+
+export type ToggleProps = {
+  isDarkMode: boolean;
+  onToggleDarkMode: (enabled: boolean) => void;
+};
+
+export type HeaderProps = ToggleProps;

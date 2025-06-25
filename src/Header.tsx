@@ -1,13 +1,10 @@
 import { css } from "../styled-system/css";
 import githubLogo from "./assets/github.png";
 import ToggleButton from "./components/ToggleButton";
+import type { HeaderProps } from "./types/type";
 
-type HeaderProps = {
-  isDarkMode: boolean;
-  onToggleDarkMode: (enabled: boolean) => void;
-};
 
-function Header({ isDarkMode, onToggleDarkMode }: HeaderProps) {
+function Header( props : HeaderProps) {
   return (
     <header
       className={css({
@@ -32,7 +29,7 @@ function Header({ isDarkMode, onToggleDarkMode }: HeaderProps) {
           Search users or repositories below
         </p>
       </section>
-      <ToggleButton isDarkMode={isDarkMode} onToggleDarkMode={onToggleDarkMode} />
+      <ToggleButton {...props} />
     </header>
   );
 }

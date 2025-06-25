@@ -1,11 +1,7 @@
+import type { ToggleProps } from "../types/type";
 import "./ToggleButton.css";
 
-type ToggleButtonProps = {
-  isDarkMode: boolean;
-  onToggleDarkMode: (enabled: boolean) => void;
-};
-
-const ToggleButton = ({ isDarkMode, onToggleDarkMode }: ToggleButtonProps) => {
+const ToggleButton = ({ isDarkMode, onToggleDarkMode }: ToggleProps) => {
   return (
     <label className="switch">
       <input
