@@ -4,13 +4,21 @@ import Header from "./Header";
 import SearchForm from "./SearchForm";
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const savedValue = window.localStorage.getItem("color-mode");
+    return savedValue !== null ? JSON.parse(savedValue) : false;
+  });
   useEffect(() => {
     document.documentElement.setAttribute(
       "data-color-mode",
       isDarkMode ? "dark" : "light"
     );
   }, [isDarkMode]);
+
+  useEffect(
+    () => window.localStorage.setItem("color-mode", isDarkMode.toString()),
+    [isDarkMode]
+  );
 
   const handleToggleDarkMode = (enabled: boolean) => {
     setIsDarkMode(enabled);
