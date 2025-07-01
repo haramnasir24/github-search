@@ -1,7 +1,8 @@
 import { css } from "../styled-system/css";
 import githubLogo from "./assets/github.png";
-import ToggleButton from "./components/ToggleButton";
+
 import type { HeaderProps } from "./types/type";
+import ToggleButton from "./components/toggle/ToggleButton";
 
 
 function Header( props : HeaderProps) {
