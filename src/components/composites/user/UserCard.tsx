@@ -1,5 +1,5 @@
-import { css } from "../../styled-system/css";
-import type { UserResult } from "../types/type";
+import { css } from "../../../../styled-system/css";
+import type { UserResult } from "../../../shared/types/type";
 
 type UserCardProps = {
   user: UserResult;

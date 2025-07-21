@@ -1,4 +1,4 @@
-import type { ToggleProps } from "../../../types/type";
+import type { ToggleProps } from "../../../shared/types/type";
 import "./ToggleButton.css";
 
 const ToggleButton = ({ isDarkMode, onToggleDarkMode }: ToggleProps) => {

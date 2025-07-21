@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { css } from "../styled-system/css";
-import Header from "./Header";
-import SearchForm from "./SearchForm";
+import Header from "./components/composites/common/Header";
+import SearchForm from "./components/composites/search/SearchForm";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(() => {

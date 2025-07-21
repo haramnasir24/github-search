@@ -1,13 +1,10 @@
 import { useCallback, useState } from "react";
-import { css } from "../styled-system/css";
-import useDebounce from "./hooks/useDebounce";
-import useInfiniteScroll from "./hooks/useInfiniteScroll";
-import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "./redux/store";
-import { cacheResults } from "./slices/searchSlice";
-import UserCard from "./components/UserCard";
-import RepoCard from "./components/RepoCard";
-import type { RepoResult, UserResult } from "./types/type";
+import useDebounce from "../../../shared/hooks/useDebounce";
+import useInfiniteScroll from "../../../shared/hooks/useInfiniteScroll";
+import { css } from "../../../../styled-system/css";
+import type { RepoResult, UserResult } from "../../../shared/types/type";
+import RepoCard from "../repo-content/RepoCard";
+import UserCard from "../user/UserCard";
 
 function SearchForm() {
   const [searchInput, setSearchInput] = useState("");
@@ -17,21 +14,10 @@ function SearchForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const dispatch = useDispatch();
-  const cache = useSelector((state: RootState) => state.search.cache);
-
-  const cacheKey = `${selectedValue}:${searchInput}`;
-
   // useDebounce hook usage
   useDebounce(
     () => {
       if (searchInput.length >= 3) {
-        // Check cache first
-        if (cache[cacheKey]) {
-          setResults(cache[cacheKey].results as (UserResult | RepoResult)[]);
-          return;
-        }
-
         setLoading(true);
         setError(null);
 
@@ -44,13 +30,6 @@ function SearchForm() {
           .then((res) => res.json())
           .then((data) => {
             setResults(data.items || []);
-            dispatch(
-              cacheResults({
-                term: searchInput,
-                entity: selectedValue,
-                results: data.items || [],
-              })
-            );
             setLoading(false);
           })
           .catch((err) => {
@@ -65,7 +44,7 @@ function SearchForm() {
       }
     },
     500,
-    [searchInput, selectedValue, cache]
+    [searchInput, selectedValue]
   );
 
   // infinite scrolling

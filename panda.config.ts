@@ -1,7 +1,7 @@
 import { defineConfig } from "@pandacss/dev";
+import { cardRecipe } from "./src/shared/recipes/card";
 
 export default defineConfig({
-  presets: ["@shadow-panda/preset"],
   // Whether to use css reset
   preflight: true,
 
@@ -19,8 +19,8 @@ export default defineConfig({
           primary: {
             DEFAULT: {
               value: {
-                base: "{colors.grayscale.900}",
-                _dark: "{colors.grayscale.50}",
+                base: "{colors.gray.900}",
+                _dark: "{colors.gray.50}",
               },
             },
           },
@@ -37,6 +37,9 @@ export default defineConfig({
             },
           },
         },
+      },
+      recipes: {
+        card: cardRecipe,
       },
     },
   },

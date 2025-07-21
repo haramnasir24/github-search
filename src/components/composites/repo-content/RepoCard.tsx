@@ -1,5 +1,7 @@
-import { css } from "../../styled-system/css";
-import type { RepoResult } from "../types/type";
+import { css } from "../../../../styled-system/css";
+import { card } from "../../../../styled-system/recipes";
+import type { RepoResult } from "../../../shared/types/type";
+
 
 type RepoCardProps = {
   repo: RepoResult;
@@ -7,11 +9,7 @@ type RepoCardProps = {
 };
 
 const RepoCard = ({ repo, refProp }: RepoCardProps) => (
-  <div
-    key={repo.id}
-    ref={refProp}
-    className={css({ border: "1px solid #353634", p: 2 })}
-  >
+  <div key={repo.id} ref={refProp} className={card({ type: "repo" })}>
     <div>{repo.full_name}</div>
     <div>
       Owner:{" "}
