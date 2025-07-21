@@ -1,6 +1,7 @@
 import { defineConfig } from "@pandacss/dev";
 
 export default defineConfig({
+  presets: ["@shadow-panda/preset"],
   // Whether to use css reset
   preflight: true,
 
@@ -15,6 +16,14 @@ export default defineConfig({
     extend: {
       semanticTokens: {
         colors: {
+          primary: {
+            DEFAULT: {
+              value: {
+                base: "{colors.grayscale.900}",
+                _dark: "{colors.grayscale.50}",
+              },
+            },
+          },
           bg: {
             value: {
               _light: "{colors.white}",
