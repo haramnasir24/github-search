@@ -16,6 +16,8 @@ function useInfiniteScroll(callback: () => void) {
       { threshold: 1 }
     );
 
+    // * observer ref observes the last element ref
+
     if (lastElementRef.current){
         observerRef.current.observe(lastElementRef.current);
     }

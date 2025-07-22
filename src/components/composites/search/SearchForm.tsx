@@ -1,77 +1,37 @@
-import { useCallback, useState } from "react";
-import useDebounce from "../../../shared/hooks/useDebounce";
-import useInfiniteScroll from "../../../shared/hooks/useInfiniteScroll";
+import type {
+  RepoResult,
+  SearchType,
+  UserResult,
+} from "../../../shared/types/type";
 import { css } from "../../../../styled-system/css";
-import type { RepoResult, UserResult } from "../../../shared/types/type";
 import RepoCard from "../repo-content/RepoCard";
 import UserCard from "../user/UserCard";
 
-function SearchForm() {
-  const [searchInput, setSearchInput] = useState("");
-  const [selectedValue, setSelectedValue] = useState("users");
-  const [results, setResults] = useState<(UserResult | RepoResult)[]>([]);
-  const [hasMore, setHasMore] = useState(true);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+interface SearchFormProps {
+  searchInput: string;
+  setSearchInput: (value: string) => void;
+  selectedValue: SearchType;
+  setSelectedValue: (value: SearchType) => void;
+  results: (UserResult | RepoResult)[];
+  isLoading: boolean;
+  isError: boolean;
+  error: Error | null;
+  lastElementRef: React.RefObject<HTMLDivElement | null>;
+  isFetchingNextPage: boolean;
+}
 
-  // useDebounce hook usage
-  useDebounce(
-    () => {
-      if (searchInput.length >= 3) {
-        setLoading(true);
-        setError(null);
-
-        const endpoint =
-          selectedValue === "users"
-            ? `https://api.github.com/search/users?q=${encodeURIComponent(searchInput)}`
-            : `https://api.github.com/search/repositories?q=${encodeURIComponent(searchInput)}`;
-
-        fetch(endpoint)
-          .then((res) => res.json())
-          .then((data) => {
-            setResults(data.items || []);
-            setLoading(false);
-          })
-          .catch((err) => {
-            setError(err.message || "Something went wrong");
-            setResults([]);
-            setLoading(false);
-          });
-      } else {
-        setResults([]);
-        setError(null);
-        setLoading(false);
-      }
-    },
-    500,
-    [searchInput, selectedValue]
-  );
-
-  // infinite scrolling
-  const fetchMore = useCallback(() => {
-    if (!hasMore || searchInput.length < 3) return;
-    const endpoint =
-      selectedValue === "users"
-        ? `https://api.github.com/search/users?q=${encodeURIComponent(searchInput)}`
-        : `https://api.github.com/search/repositories?q=${encodeURIComponent(searchInput)}`;
-
-    setLoading(true);
-    setError(null);
-    fetch(endpoint)
-      .then((res) => res.json())
-      .then((data) => {
-        setResults((prev) => [...prev, ...(data.items || [])]);
-        setHasMore((data.items?.length ?? 0) > 0);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message || "Something went wrong");
-        setLoading(false);
-      });
-  }, [searchInput, selectedValue, hasMore]);
-
-  const lastElementRef = useInfiniteScroll(fetchMore);
-
+function SearchForm({
+  searchInput,
+  setSearchInput,
+  selectedValue,
+  setSelectedValue,
+  results,
+  isLoading,
+  isError,
+  error,
+  lastElementRef,
+  isFetchingNextPage,
+}: SearchFormProps) {
   return (
     <div
       className={css({
@@ -117,7 +77,9 @@ function SearchForm() {
           id="selectOption"
           name="select-opt"
           value={selectedValue}
-          onChange={(event) => setSelectedValue(event.target.value)}
+          onChange={(event) =>
+            setSelectedValue(event.target.value as SearchType)
+          }
         >
           <option value="users"> Users</option>
           <option value="repositories"> Repositories</option>
@@ -125,7 +87,7 @@ function SearchForm() {
       </form>
 
       {/* Loading and error states */}
-      {loading && (
+      {isLoading && (
         <div
           className={css({
             color: "gray.600",
@@ -136,7 +98,7 @@ function SearchForm() {
           Loading...
         </div>
       )}
-      {error && (
+      {isError && (
         <div
           className={css({
             color: "red.500",
@@ -144,7 +106,7 @@ function SearchForm() {
             textAlign: "center",
           })}
         >
-          {error}
+          {error?.message || "Something went wrong"}
         </div>
       )}
 
@@ -183,6 +145,17 @@ function SearchForm() {
           return null;
         })}
       </div>
+      {isFetchingNextPage && (
+        <div
+          className={css({
+            color: "gray.600",
+            fontSize: "md",
+            textAlign: "center",
+          })}
+        >
+          Loading more...
+        </div>
+      )}
     </div>
   );
 }

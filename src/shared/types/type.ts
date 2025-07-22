@@ -24,3 +24,7 @@ export type ToggleProps = {
 };
 
 export type HeaderProps = ToggleProps;
+
+export type SearchType = "users" | "repositories";
+
+export type GithubResponse = { items: (UserResult | RepoResult)[]; hasMore: boolean };

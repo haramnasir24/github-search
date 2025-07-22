@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { css } from "../styled-system/css";
 import Header from "./components/composites/common/Header";
-import SearchForm from "./components/composites/search/SearchForm";
+import SearchFormContainer from "./shared/containers/SearchFormContainer/SearchFormContainer";
+import { container } from "styled-system/patterns";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -25,22 +26,27 @@ function App() {
   };
 
   return (
-    <div
-      className={css({
-        display: "flex",
-        flexDir: "column",
-        gap: "4",
-        fontFamily: "Arial",
-        width: "100%",
-        maxWidth: "900px",
-        marginX: "auto",
-        paddingTop: 8,
-        bg: "bg",
-        color: "text",
-      })}
-    >
-      <Header isDarkMode={isDarkMode} onToggleDarkMode={handleToggleDarkMode} />
-      <SearchForm />
+    <div className={container({ maxW: "700" })}>
+      <div
+        className={css({
+          display: "flex",
+          flexDir: "column",
+          gap: "4",
+          fontFamily: "Arial",
+          width: "100%",
+          maxWidth: "900px",
+          marginX: "auto",
+          paddingTop: 8,
+          bg: "bg",
+          color: "text",
+        })}
+      >
+        <Header
+          isDarkMode={isDarkMode}
+          onToggleDarkMode={handleToggleDarkMode}
+        />
+        <SearchFormContainer />
+      </div>
     </div>
   );
 }
