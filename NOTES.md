@@ -17,3 +17,6 @@ Use the hook for all data, loading, and error state.
 Use the infinite scroll logic to call fetchNextPage.
 Flatten the paginated data for rendering.
 No need for manual fetch or debounce logic, React Query handles caching and deduplication.
+
+
+how does react query manage store

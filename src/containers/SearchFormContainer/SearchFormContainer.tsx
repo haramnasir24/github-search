@@ -1,16 +1,17 @@
 import { useState } from "react";
 import useDebounce from "@/shared/hooks/useDebounce";
-import useInfiniteScroll from "../../hooks/useInfiniteScroll";
-import { useGithubSearch } from "../../hooks/useGithubSearch";
-import SearchForm from "../../../components/composites/search/SearchForm";
+import useInfiniteScroll from "../../shared/hooks/useInfiniteScroll";
+import { useGithubSearch } from "../../shared/hooks/useGithubSearch";
+import SearchForm from "../../components/composites/search/SearchForm";
 import type { SearchType } from "@/shared/types/type";
 
 function SearchFormContainer() {
   const [searchInput, setSearchInput] = useState("");
   const [selectedValue, setSelectedValue] = useState<SearchType>("users");
+  // * useDebounce hook
   const debouncedSearchInput = useDebounce(searchInput, 500);
 
-  // * using react query
+  // * react query hook
   const {
     data,
     isLoading,
@@ -24,11 +25,9 @@ function SearchFormContainer() {
     query: debouncedSearchInput,
   });
 
+  const results = data?.pages.flatMap((page) => page.items) ?? []; // data.pages contains the fetched pages
 
-  console.log(data);
-  // data.pages contains the fetched pages
-  const results = data?.pages.flatMap((page) => page.items) ?? [];
-
+  // * useInfiniteScroll hook
   const lastElementRef = useInfiniteScroll(() => {
     if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
@@ -51,4 +50,4 @@ function SearchFormContainer() {
   );
 }
 
-export default SearchFormContainer; 
+export default SearchFormContainer;

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { css } from "../styled-system/css";
 import Header from "./components/composites/common/Header";
-import SearchFormContainer from "./shared/containers/SearchFormContainer/SearchFormContainer";
+import SearchFormContainer from "./containers/SearchFormContainer/SearchFormContainer";
 import { container } from "styled-system/patterns";
 
 function App() {
+  // * use context for dark mode
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedValue = window.localStorage.getItem("color-mode");
     return savedValue !== null ? JSON.parse(savedValue) : false;

@@ -4,7 +4,7 @@ import type {
   UserResult,
 } from "../../../shared/types/type";
 import { css } from "../../../../styled-system/css";
-import RepoCard from "../repo-content/RepoCard";
+import RepoCard from "../repo/RepoCard";
 import UserCard from "../user/UserCard";
 
 interface SearchFormProps {
